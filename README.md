@@ -1,35 +1,6 @@
-# GSAP-demo-resume
+# zabeth-portfolio
 
-This template should help get you started developing with Vue 3 in Vite.
+This is my portfolio with GSAP, Vue3, TailwindCSS.  
+You can click [here](https://worried-paint-a0d.notion.site/Portfolio-2474862c23c480079eccdb9ee4f815e3?source=copy_link) to know more about my other project.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+> Optimized for desktop view, mobile adaptation in progress
