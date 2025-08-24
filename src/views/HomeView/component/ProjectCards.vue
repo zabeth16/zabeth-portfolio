@@ -38,7 +38,7 @@ onMounted(() => {
     timeline = gsap.timeline({
       scrollTrigger: {
         trigger: '.card-box',
-        start: 'top 120%',
+        start: 'top 40%',
         end: '+=1200',
         scrub: true,
         anticipatePin: 1,
