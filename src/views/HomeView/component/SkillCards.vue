@@ -91,7 +91,7 @@ onMounted(() => {
         opacity: 1,
         scrollTrigger: {
           trigger: card,
-          start: 'top 30%',
+          start: 'top 60%',
           end: 'top 60%',
           toggleActions: 'play none none reverse',
           refreshPriority: -1, // 降低優先級，避免過於頻繁的計算
