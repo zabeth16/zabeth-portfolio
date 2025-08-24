@@ -1,36 +1,57 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 let timeline = null
+let mm = gsap.matchMedia()
 
 onMounted(() => {
-  timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.card-box',
-      start: 'top 50px',
-      end: '+=1500',
-      scrub: true,
-      pin: true,
-      anticipatePin: 1,
-    },
+  mm.add('(min-width: 700px)', () => {
+    timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.card-box',
+        start: 'top 50px',
+        end: '+=1500',
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+      },
+    })
+
+    timeline
+      .from('.card-title', { yPercent: 100 })
+      .to('.card-title', {
+        width: '78vw',
+        duration: 0.5,
+        ease: 'power2.out',
+      })
+      .from('.card-one', { xPercent: -100 })
+      .from('.card-two', { xPercent: 102 })
+      .from('.card-three', { yPercent: -100 })
+      .from('.card-four', { yPercent: 100, autoAlpha: 0 })
   })
 
-  timeline
-    .from('.card-title', { yPercent: 100 })
-    .to('.card-title', {
-      width: '78vw',
-      duration: 0.5,
-      ease: 'power2.out',
+  mm.add('(max-width: 700px)', () => {
+    timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.card-box',
+        start: 'top center',
+        end: '+=1500',
+        scrub: true,
+        anticipatePin: 1,
+      },
     })
-    .from('.card-one', { xPercent: -100 })
-    .from('.card-two', { xPercent: 102 })
-    .from('.card-three', { yPercent: -100 })
-    .from('.card-four', { yPercent: 100, autoAlpha: 0 })
+    timeline
+      .from('.card-one', { xPercent: -110 })
+      .from('.card-two', { xPercent: 110 })
+      .from('.card-three', { xPercent: -110 })
+      .from('.card-four', { xPercent: 110, autoAlpha: 0 })
+  })
 })
+onBeforeUnmount(() => mm?.revert())
 </script>
 <template>
   <div
@@ -42,24 +63,14 @@ onMounted(() => {
       Projects
     </div>
 
-    <!-- <div
-      class="card-one absolute w-[1000px] w-[1000px] top-0 left-0 bg-red-400 flex items-center justify-center text-[80px]"
-    >
-       <img
-        class="w-full h-full object-cover"
-        src="https://img.notionusercontent.com/s3/prod-files-secure%2Fbb35ec0e-0895-4ac1-9277-df94454ee371%2F6dbd3ca5-cf29-4b09-b1b8-9b42ad97986c%2Fimage.png/size/w=2000?exp=1755877926&sig=99B-R4rceSX3fOis0CmHcMfnLPYUes89oY4M1wU5lAw&id=2474862c-23c4-817d-914f-fb7d6153cd82&table=block&userId=4bb4c8fd-231b-496c-99f7-ade481a3eb28"
-
-      WWWHHHYYY
-    </div> -->
-
     <div
       class="card-one absolute top-0 left-0 w-[78vw] h-[500px] bg-black text-white rounded-[20px] text-center flex justify-center p-10"
     >
-      <span class="absolute top-10 left-10 text-[30px] font-bold"
-        >Project 1 - YOLO Defect Tagger</span
-      >
-      <div div class="flex items-center justify-center h-full gap-10">
-        <div class="max-w-[700px] text-left text-white text-sm leading-relaxed">
+      <div class="progect-name absolute top-10 left-10 text-[30px] font-bold">
+        Project 1 - YOLO Defect Tagger
+      </div>
+      <div div class="card-content flex items-center justify-center h-full gap-10">
+        <div class="card-word max-w-[700px] text-left text-white text-sm leading-relaxed">
           Electron + Vue3 desktop app for industrial image labeling, integrating YOLO coordinates,
           canvas operations, and MVVM architecture.
         </div>
@@ -73,18 +84,18 @@ onMounted(() => {
     <div
       class="card-two absolute top-0 left-0 w-[78vw] h-[500px] bg-zinc-900 text-white rounded-[20px] p-10"
     >
-      <span class="absolute top-10 left-10 text-[30px] font-bold">
+      <div class="progect-name absolute top-10 left-10 text-[30px] font-bold">
         Project 2 – GateBoard system
-      </span>
+      </div>
 
-      <div class="flex items-center justify-center h-full gap-10">
+      <div class="card-content flex items-center justify-center h-full gap-10">
         <img
           class="h-[300px] rounded shadow object-cover"
           src="https://images.plurk.com/7LtF2MAbvittoknj1FKOVr.png"
           alt="GateBoard Dashboard"
         />
 
-        <div class="flex flex-col justify-center h-full gap-4 max-w-[600px]">
+        <div class="card-word flex flex-col justify-center h-full gap-4 max-w-[600px]">
           <p class="text-left text-sm leading-relaxed">
             A factory floor dashboard system for door manufacturing, combining real-time production
             tracking, WebView-based work reporting, multilingual support, and GPT-assisted voice
@@ -97,11 +108,11 @@ onMounted(() => {
     <div
       class="card-three absolute top-0 left-0 w-[78vw] h-[500px] bg-gray-400 text-white rounded-[20px] p-10"
     >
-      <span class="absolute top-10 left-10 text-[30px] font-bold">
+      <div class="progect-name absolute top-10 left-10 text-[30px] font-bold">
         Project 3 - HealthCare APP
-      </span>
+      </div>
 
-      <div class="flex items-center justify-center h-full gap-10">
+      <div class="card-content health flex items-center justify-center h-full gap-10">
         <img
           class="h-[300px] rounded shadow object-cover"
           src="https://images.plurk.com/66M3toSH3mmYHJZtnir1H1.png"
@@ -125,8 +136,10 @@ onMounted(() => {
     <div
       class="card-four absolute top-0 left-0 w-[78vw] h-[500px] rounded-[20px] bg-white text-center flex justify-center p-10"
     >
-      <span class="absolute top-10 left-10 text-[30px] font-bold">Project 4 - bird-bird-999</span>
-      <div div class="flex items-center justify-center h-full gap-10">
+      <div class="progect-name absolute top-10 left-10 text-[30px] font-bold">
+        Project 4 - bird-bird-999
+      </div>
+      <div div class="card-content flex items-center justify-center h-full gap-10">
         <div class="max-w-[700px] text-left text-sm leading-relaxed">
           A birdwatching web app for exploring species in Taiwan, featuring photo uploads, location
           tagging via Google Maps, seasonal hotspot search via eBird API, and a playful avatar
@@ -158,5 +171,72 @@ onMounted(() => {
 <style scoped>
 .card-two {
   background-color: #2b2b2b;
+}
+@media (max-width: 700px) {
+  .card-box {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 16px;
+    overflow: visible;
+    flex-direction: column;
+  }
+
+  .card-title {
+    position: static;
+    width: 100%;
+    height: auto;
+    line-height: 1.2;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    font-size: 28px;
+    border-width: 2px;
+  }
+
+  .progect-name {
+    position: static;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .card-one,
+  .card-two,
+  .card-three,
+  .card-four {
+    position: static;
+    width: 350px;
+    height: auto;
+    margin: 16px 0;
+    padding: 16px;
+    display: block;
+  }
+  .card-content {
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+  }
+  .card-content.health {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    text-align: left;
+  }
+  .card-word {
+    width: 300px;
+    height: auto;
+  }
+
+  /* 圖片全寬、有限高 */
+  .card-one img,
+  .card-two img,
+  .card-three img,
+  .card-four img {
+    max-height: 220px;
+    height: auto;
+    object-fit: cover;
+  }
 }
 </style>

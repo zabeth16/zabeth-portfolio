@@ -5,10 +5,12 @@ function scrollToTop() {
 </script>
 <template>
   <section
-    class="w-full h-[50vh] bg-white border-t-2 border-gray-400 rounded-t-full text-center pt-20"
+    class="container w-full h-[50vh] bg-white border-t-2 border-gray-400 rounded-t-full text-center pt-20"
   >
     <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-    <p class="text-lg mb-4">I'm open to front-end opportunities — feel free to reach out!</p>
+    <div class="notice text-lg mb-4">
+      I'm open to front-end opportunities — feel free to reach out!
+    </div>
     <a
       href="mailto:karta1862025@gmail.com"
       class="text-xl underline hover:text-blue-400 transition-all duration-300"
@@ -23,4 +25,17 @@ function scrollToTop() {
     ↑ Top
   </button>
 </template>
-<style scoped></style>
+<style scoped>
+@media (max-width: 700px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+  }
+  .notice {
+    font-size: 20px;
+    width: 250px;
+  }
+}
+</style>

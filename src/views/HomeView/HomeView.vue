@@ -62,7 +62,7 @@ onMounted(() => {
 <template>
   <div class="flex justify-center">
     <div>
-      <div class="banner-slogan w-[1000px] h-[95vh] text-[80px] mt-30 text-center font-bold">
+      <div class="banner-slogan w-[1000px] h-dvh text-[80px] mt-30 text-center font-bold">
         <h1 class="name">ZABETH Chen</h1>
         <h3 class="identity">Front-end Developer</h3>
         <div class="scroll-notice text-[25px] flex flex-col items-center justify-center">
@@ -93,4 +93,14 @@ onMounted(() => {
     </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+@media (max-width: 700px) {
+  .banner-slogan {
+    font-size: 30px;
+    height: 500px;
+  }
+  .scroll-notice {
+    font-size: 20px;
+  }
+}
+</style>

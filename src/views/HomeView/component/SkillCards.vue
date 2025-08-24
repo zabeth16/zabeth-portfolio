@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+let mm = gsap.matchMedia()
 
 const skills = [
   'Vue 3',
@@ -24,34 +25,31 @@ const skills = [
 ]
 
 onMounted(() => {
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.skill-title',
-      start: 'top 90%',
-      scrub: 1,
-      toggleActions: 'play none none none',
-    },
-  })
-
-  timeline
-    .from('.skill-title', {
-      scrub: true,
-      pin: true,
-      xPercent: -100,
-      duration: 0.8,
-      ease: 'power2.out',
+  mm.add('(min-width: 700px)', () => {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.skill-title',
+        start: 'top 90%',
+        scrub: 1,
+      },
     })
-    .from(
-      '.skills-wrapper',
-      {
-        scrub: true,
-        pin: true,
-        xPercent: 100,
+
+    timeline
+      .from('.skill-title', {
+        xPercent: -100,
         duration: 0.8,
         ease: 'power2.out',
-      },
-      '-=0.5',
-    )
+      })
+      .from(
+        '.skills-wrapper',
+        {
+          xPercent: 100,
+          duration: 0.8,
+          ease: 'power2.out',
+        },
+        '-=0.5',
+      )
+  })
 
   // 首次的卡片旋轉
   ScrollTrigger.batch('.skill-card', {
@@ -73,7 +71,6 @@ onMounted(() => {
       )
     },
     start: 'top 85%',
-    once: true,
   })
 
   gsap.utils.toArray('.skill-card').forEach((card) => {
@@ -142,5 +139,27 @@ onMounted(() => {
   transform-style: preserve-3d;
   backface-visibility: hidden;
   will-change: transform, opacity;
+}
+@media (max-width: 700px) {
+  .skill-title {
+    font-size: 30px;
+  }
+  .skills-wrapper {
+    height: auto;
+    background: #f5f5f5;
+    padding: 10px;
+  }
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  .skill-card {
+    min-width: auto;
+    height: 72px;
+    font-size: 16px;
+    opacity: 0;
+  }
 }
 </style>
