@@ -61,7 +61,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="flex justify-center">
-    <div>
+    <div class="overflow-hidden">
       <div class="banner-slogan w-[1000px] h-dvh text-[80px] mt-30 text-center font-bold">
         <h1 class="name">ZABETH Chen</h1>
         <h3 class="identity">Front-end Developer</h3>
@@ -98,6 +98,7 @@ onMounted(() => {
   .banner-slogan {
     font-size: 30px;
     height: 500px;
+    width: 400px;
   }
   .scroll-notice {
     font-size: 20px;

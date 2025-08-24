@@ -20,7 +20,7 @@ function scrollToTop() {
   </section>
   <button
     @click="scrollToTop"
-    class="fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-600 cursor-pointer transition-all z-50"
+    class="top-bottom fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded-full shadow-md hover:bg-gray-600 cursor-pointer transition-all z-50"
   >
     ↑ Top
   </button>
@@ -32,10 +32,14 @@ function scrollToTop() {
     flex-direction: column;
     align-items: center;
     padding-top: 10px;
+    justify-content: center;
   }
   .notice {
     font-size: 20px;
     width: 250px;
+  }
+  .top-bottom {
+    right: 0;
   }
 }
 </style>

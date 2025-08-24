@@ -7,18 +7,18 @@ gsap.registerPlugin(ScrollTrigger)
 const mm = gsap.matchMedia()
 
 onMounted(() => {
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: '.container',
-      start: 'top top',
-      end: '+=200px',
-      scrub: true,
-      pin: true,
-      id: 'container-id',
-    },
-  })
-
   mm.add('(min-width: 700px)', () => {
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.container',
+        start: 'top top',
+        end: '+=200px',
+        scrub: true,
+        pin: true,
+        id: 'container-id',
+      },
+    })
+
     const boxes = gsap.utils.toArray('.box')
     boxes.forEach((box) => {
       gsap.to(box, {
@@ -120,6 +120,9 @@ onMounted(() => {
   }
   .work-title {
     font-size: 25px;
+  }
+  .track {
+    visibility: hidden;
   }
 }
 </style>

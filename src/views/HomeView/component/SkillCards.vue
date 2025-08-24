@@ -49,53 +49,72 @@ onMounted(() => {
         },
         '-=0.5',
       )
-  })
 
-  // 首次的卡片旋轉
-  ScrollTrigger.batch('.skill-card', {
-    onEnter: (targets) => {
-      gsap.fromTo(
-        targets,
-        {
-          opacity: 0,
-          rotationY: -90,
-          transformPerspective: 800,
-        },
-        {
-          opacity: 1,
-          rotationY: 0,
-          duration: 1,
-          ease: 'back.out(1.4)',
-          stagger: 0.15,
-        },
-      )
-    },
-    start: 'top 85%',
-  })
-
-  gsap.utils.toArray('.skill-card').forEach((card) => {
-    gsap.to(card, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 85%',
-        end: 'top 40%',
-        scrub: true,
+    // 卡片旋轉
+    ScrollTrigger.batch('.skill-card', {
+      onEnter: (targets) => {
+        gsap.fromTo(
+          targets,
+          {
+            opacity: 0,
+            rotationY: -90,
+            transformPerspective: 800,
+          },
+          {
+            opacity: 1,
+            rotationY: 0,
+            duration: 1,
+            ease: 'back.out(1.4)',
+            stagger: 0.15,
+          },
+        )
       },
+      start: 'top 85%',
+    })
+
+    gsap.utils.toArray('.skill-card').forEach((card) => {
+      gsap.to(card, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 100%',
+          end: 'top 40%',
+          scrub: true,
+        },
+      })
+    })
+  })
+
+  mm.add('(max-width: 700px)', () => {
+    gsap.utils.toArray('.skill-card').forEach((card) => {
+      gsap.to(card, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: card,
+          start: 'top 120%',
+          end: 'top 40%',
+          toggleActions: 'play none none reverse',
+          refreshPriority: -1, // 降低優先級，避免過於頻繁的計算
+        },
+      })
     })
   })
 })
 </script>
 
 <template>
-  <h1 class="skill-title">Skills</h1>
-  <section class="skills-wrapper">
-    <div class="skills-grid">
-      <div class="skill-card" v-for="(skill, index) in skills" :key="index">
-        {{ skill }}
-      </div>
+  <div class="flex justify-center">
+    <div>
+      <h1 class="skill-title">Skills</h1>
+      <section class="skills-wrapper">
+        <div class="skills-grid">
+          <div class="skill-card" v-for="(skill, index) in skills" :key="index">
+            {{ skill }}
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
+  </div>
 </template>
 <style scoped>
 .skill-title {
@@ -110,6 +129,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   height: 120vh;
+  width: 1000px;
 }
 .skills-grid {
   display: grid;
@@ -148,6 +168,7 @@ onMounted(() => {
     height: auto;
     background: #f5f5f5;
     padding: 10px;
+    width: 350px;
   }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -38,8 +38,8 @@ onMounted(() => {
     timeline = gsap.timeline({
       scrollTrigger: {
         trigger: '.card-box',
-        start: 'top center',
-        end: '+=1500',
+        start: 'top 120%',
+        end: '+=1200',
         scrub: true,
         anticipatePin: 1,
       },
@@ -177,7 +177,7 @@ onBeforeUnmount(() => mm?.revert())
     position: relative;
     width: 100%;
     max-width: 100%;
-    height: auto;
+    height: fit-content;
     padding: 16px;
     overflow: visible;
     flex-direction: column;
