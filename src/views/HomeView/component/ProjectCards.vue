@@ -39,7 +39,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: '.card-box',
         start: 'top 40%',
-        end: '+=1200',
+        end: '+=1500',
         scrub: true,
         anticipatePin: 1,
       },
